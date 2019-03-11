@@ -2,46 +2,37 @@
 // 100 people stand in a circle in order 1 to 100. No. 1 has a sword. He kills the next person (i.e. No. 2) and gives the sword to the next living person (i.e. No. 3). All people do the same until only 1 survives. Which number survives to the end?
 
 // Answer: 73
-// make function with array passed in
-// need a way to check if the last item in the array is going need to have a turn in the circle
-// return the array
 
-// function swordPasser(arr) {
-//   let killed = 0;
-//   let killer = 0;
-//   let endOfCircle = arr.length;
-//   let turn = true;
-//   for (let i = 0, len = arr.length; i < len; i++) {
-//     if (arr[i]) {
-//         killer = arr[i];
-//     killed = arr[i + 1];
-//     console.log(killed);
-//     arr.splice(i + 1, 1);
-//     turn = false;} else if (arr[i] === endOfCircle && arr[i+1] === undefined) {
-//     arr.splice(0, 1);
-//   }
-//   if (arr.length > 1) {
-//     console.log(arr);
-//     swordPasser(arr);
-//     turn = true;
-//   }
-//   return arr;
-// }}
+var numArr = 0;
 
 function swordPasser(arr) {
-  let arr2 = arr;
-  for (let i = 0; i <= arr.length; i++) arr.splice(i + 1, 1);
-  arr.push(arr.shift());
-  // console.log(arr);
+  var remainder = numArr % arr.length;
+  for (var i = 0; i <= arr.length; i++) arr.splice(i + 1, 1);
   if (arr.length > 1) {
+    numArr += 1;
+    if (arr.length % 2 === 0) {
+      numArr = 0;
+    } else {
+      numArr = arr.length + 1;
+    }
+    if (remainder === 1) {
+      arr.splice(0, 1);
+    }
     swordPasser(arr);
   }
   return arr;
 }
 
-// console.log(swordPasser([1, 2, 3, 4, 5, 6, 7, 8, 9]));
+// console.log(swordPasser([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]));
 
-// tried two different methods to find answer. neither work because I need a way to find out if the array needs to pass the last element to the front
+
+console.log(
+  swordPasser([
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100
+  ])
+);
+
+
 // this took me about one and a half hours
 //----------------------------------------------------
 
@@ -78,9 +69,13 @@ function switcher(arr) {
   }
   return arr3.length;
 }
+
 let newArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-// console.log(switcher(newArray));
+console.log(switcher(newArray));
+console.log(switcher([
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100
+]));
 
 //This one got to be a little too much at the end. I was trying to count how many times each of the objects repeated in the duplicates object. if they were odd then the light was on at the end, even meant the light was off.
 //Also, I realize that this only works with an array of numbers. I believe I could assign each of them a number though and then do the same thing.
@@ -120,15 +115,8 @@ function primeNumProb(arr) {
       legal.push(i);
     }
   }
-
   console.log(primes);
   let withoutPrime = [];
-  legal.forEach(val => {
-    val = "" + val;
-    if (val.indexOf("1") === -1) {
-      withoutPrime.push(val);
-    }
-  });
   legal.forEach(val => {
     val = "" + val;
     if (val.indexOf("2") === -1) {
@@ -158,13 +146,18 @@ function primeNumProb(arr) {
   withoutPrime.forEach(function(x) {
     duplicates[x] = (duplicates[x] || 0) + 1;
   });
+  console.log(duplicates)
   for (key in duplicates) {
-    if (duplicates[key] === 5) {
+    if (duplicates[key] === 4) {
       final.push(key);
     }
   }
-  return final;
+  return final.length;
 }
+
+console.log(primeNumProb([
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68
+]))
 
 // I thought 2 would have been counted as a prime digit that needs to be considered. If I take out the part about two then it works but if I don't I get 13 as the final answer.
 // This one was looks like a mess after the forEach loops I copied over and over, I tried a few different ways using a ternary, but couldn't get it to work that way.
@@ -179,19 +172,21 @@ function primeNumProb(arr) {
 //two for loops, on going forward by two, the second going back by 3. When they meet return number
 
 function painters(arr) {
-  let array1 = [];
-  let array2 = [];
+ 
   let finalNum = 0;
-  for (var i = 0; i < arr.length; i += 2) {
-    array1.push(arr[i]);
+  for (var i = 0, j = arr.length-1; i < arr.length, j >= 0; i += 2, j -= 3) {
+    if(arr[j]-arr[i] < 1){
+      console.log(arr[i])
+      console.log(arr[j])
+      finalNum = arr[i] - (arr[j]/arr[i])
+     break
+    }
   }
-  for (var j = arr.length - 1; j > 0; j -= 3) {
-    array2.push(arr[j]);
-  }
-  console.log(array1.length)
-  console.log(array2.length)
   return finalNum;
 }
 
 
+console.log(painters([
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100
+]))
 
